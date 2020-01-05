@@ -24,7 +24,6 @@ body
 
 	display: flex;
 
-	background-image: url("./../resources/bg1.jpg");
 	background-repeat: no-repeat;
 	background-position: center bottom;
 	background-size: cover;
@@ -32,6 +31,8 @@ body
 
 #screen > .message
 {
+    width: 100%;
+
 	z-index: 10;
 
 	align-self: flex-end;
@@ -57,7 +58,6 @@ body
 #screen > .message > .text
 {
 	font-size: 29px;
-
 	z-index: 10;
 
 	margin-top: 15px;
