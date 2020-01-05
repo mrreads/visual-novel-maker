@@ -15,6 +15,12 @@ html
 body
 {
 	min-height: 100%;
+	display: flex;
+}
+
+#screen, #editor
+{
+	flex-grow: 1;
 }
 
 html, body, #screen
@@ -159,7 +165,7 @@ div, a, p, img
 
 	min-width: 300px;
 	margin-bottom: 20px;
-	padding: 25px 35px 40px 35px;
+	padding: 25px 35px 30px 35px;
 
 	background-color: #EBDD91;
 	box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
@@ -243,12 +249,11 @@ div, a, p, img
 	margin-top: 9px;
 }
 
-#editor > .save
+#editor > .save, #editor > .back
 {
 	font-size: 23px;
 
 	position: fixed;
-	right: 25px;
 	bottom: 25px;
 
 	min-width: 300px;
@@ -257,8 +262,69 @@ div, a, p, img
 
 	cursor: pointer;
 	text-align: center;
-
+	opacity: 0.4;
 	color: #FFFFFF;
-	background-color: rgba(0, 0, 0, 0.7);
-	box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.8);
+	box-shadow: 4px 2px 0px rgba(0, 0, 0, 0.4);
+
+	cursor: pointer;
+}
+
+#editor > .save:hover, #editor > .back:hover
+{
+	opacity: 1;
+	background-color: rgba(0, 0, 0, 0.9);
+}
+
+#editor > .act > .controls
+{
+	margin-top: 25px;
+	justify-content: flex-end;
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+#editor > .act .delete
+{
+	align-self: flex-start;
+	padding: 10px 25px;
+    padding-top: 12px;
+	cursor: pointer;
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.6);
+	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+#editor > .act > .controls > .move > p
+{
+	padding: 5px 20px;
+	cursor: pointer;
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.6);
+	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+#editor > .act > .controls > .move > p:first-child
+{
+	margin-bottom: 5px;
+}
+
+#editor > .act > .controls > .move
+{
+	margin-left: 15px;
+}
+
+#editor > .act .delete:hover, #editor > .act > .controls > .move > p:hover
+{
+	background-color: rgba(0, 0, 0, 0.9);
+}
+
+#editor > .save
+{
+	right: 25px;
+}
+
+#editor > .back
+{
+	right: 345px;
 }

@@ -17,9 +17,11 @@
         xhr.send();
         xhr.onload = () => 
         {
-            let text, act, input, temp;
+            let text, act, input, temp, up, down, remove, move, element;
         
             this.gameData = JSON.parse(xhr.response);
+
+            this.oldGameData = this.gameData;
 
             this.gameData.forEach(element => 
             {    
@@ -85,10 +87,76 @@
                     temp.appendChild(input);
                     act.appendChild(temp);
 
+                    remove = document.createElement("p");
+                    remove.classList.add('delete');
+                    remove.textContent = 'УДАЛИТЬ';
+                    remove.addEventListener('click', (e) => { e.target.parentElement.parentElement.remove(); });
+
+                    move = document.createElement("div");
+                    move.classList.add('move');
+                    up = document.createElement("p");
+                    down = document.createElement("p");
+                    up.textContent = 'выше';
+                    down.textContent = 'ниже';
+
+                    function swap(elem1, elem2) 
+                    {
+                        const tempOne = elem2.nextElementSibling;
+                        const tempTwo = elem2.parentNode;
+                        elem1.replaceWith(elem2);
+                        tempTwo.insertBefore(elem1, tempOne);
+                    }
+
+                    up.addEventListener('click', (e) => 
+                    {
+                        element = e.target.parentElement.parentElement.parentElement;
+                        swap(element.previousElementSibling, element);
+                    });
+                    down.addEventListener('click', (e) => 
+                    {
+                        element = e.target.parentElement.parentElement.parentElement;
+                        swap(element, element.nextElementSibling);
+                    });
+                    move.appendChild(up);
+                    move.appendChild(down);
+                    
+                    temp = document.createElement('div');
+                    temp.classList.add('controls');
+                    temp.appendChild(remove);
+                    temp.appendChild(move);
+                    act.appendChild(temp);
+
                     editor.appendChild(act);
                 }
             });
         }
+
+        let back = document.createElement("p");
+        back.classList.add('back');
+        back.textContent = 'вернуть изменения';
+        back.addEventListener('click', () => 
+        {
+            this.newGameData = this.oldGameData;
+            let gameData = new FormData();   
+            gameData.append('json', JSON.stringify(this.newGameData));
+            
+            let updateJSON = fetch('./php/updateJSON.php', 
+            {
+                method: 'POST',
+                body: gameData
+            });
+            updateJSON.then((result) =>
+            {
+                result.json().then((result) => 
+                {
+                    if (result == 'save')
+                    {
+                        window.location.href = 'index.html';
+                    } 
+                });
+            });
+        });
+        editor.appendChild(back);
 
         let save = document.createElement("p");
         save.classList.add('save');
@@ -122,15 +190,14 @@
             });
             updateJSON.then((result) =>
             {
-                result.json().then(() => 
+                result.json().then((result) => 
                 {
                     if (result == 'save')
                     {
-                        
+                        window.location.href = 'index.html';
                     } 
                 });
             });
-
         });
         editor.appendChild(save);
     }
