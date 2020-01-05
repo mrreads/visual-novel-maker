@@ -147,8 +147,9 @@ div, a, p, img
 
 #editor
 {
-	background-color: #EDC2E5;
 	padding: 25px;
+
+	background-color: #EDC2E5;
 }
 
 #editor > .act
@@ -164,13 +165,19 @@ div, a, p, img
 	box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
 }
 
+#editor > .act:last-child
+{
+	margin-bottom: 95px;
+}
+
 #editor > .act > .type
 {
-	letter-spacing: 2px;
-	text-transform: uppercase;
 	font-size: 28px;
 
 	margin-bottom: 15px;
+
+	letter-spacing: 2px;
+	text-transform: uppercase;
 
 	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.4);
 }
@@ -192,19 +199,24 @@ div, a, p, img
 
 #editor > .act > .input > p
 {
-	text-align: right;
-	margin-right: 15px;
-	width: 160px;
 	font-size: 18px;
+
+	width: 160px;
+	margin-right: 15px;
+
+	text-align: right;
+
 	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
 #editor > .act > .input > input
 {
+	font-size: 18px;
+
 	width: 100%;
 	height: 100%;
 	padding: 5px 15px;
-	font-size: 18px;
+
 	border: 0;
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
 	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
@@ -212,11 +224,13 @@ div, a, p, img
 
 #editor > .act > .input > textarea
 {
+	font-size: 18px;
+
 	width: 100%;
 	min-height: 50px;
 	max-height: 150px;
 	padding: 15px;
-	font-size: 18px;
+
 	resize: vertical;
 
 	border: 0;
@@ -227,4 +241,24 @@ div, a, p, img
 #editor > .act > .input:last-child > p
 {
 	margin-top: 9px;
+}
+
+#editor > .save
+{
+	font-size: 23px;
+
+	position: fixed;
+	right: 25px;
+	bottom: 25px;
+
+	min-width: 300px;
+	margin-top: 25px;
+	padding: 15px 25px;
+
+	cursor: pointer;
+	text-align: center;
+
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.7);
+	box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
 }

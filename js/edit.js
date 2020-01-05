@@ -17,17 +17,10 @@
         xhr.send();
         xhr.onload = () => 
         {
-            let type;
-            let author;
-            let character;
-            let background;
-            let text;
-            let act;
-            let input
-            let temp;
+            let text, act, input, temp;
         
             this.gameData = JSON.parse(xhr.response);
-            
+
             this.gameData.forEach(element => 
             {    
                 if (element['type'] == 'dialog')
@@ -37,12 +30,13 @@
 
                     temp = document.createElement("p");
                     temp.classList.add('type');
+                    temp.setAttribute('type', element['type']);
                     temp.textContent = 'Диалоговое окно с одним персонажем';
                     act.appendChild(temp);
 
                     temp = document.createElement("div");
                     temp.classList.add('input');
-
+                    temp.classList.add('author');
                     text = document.createElement("p");
                     text.textContent = 'Имя перснонажа: ';
                     temp.appendChild(text);
@@ -55,12 +49,13 @@
 
                     temp = document.createElement("div");
                     temp.classList.add('input');
+                    temp.classList.add('character');
                     text = document.createElement("p");
                     text.textContent = 'Персонаж: ';
-                    input.placeholder = 'Изображение персонажа';
                     temp.appendChild(text);
                     input = document.createElement("input");
                     input.type = 'text';
+                    input.placeholder = 'Изображение персонажа';
                     input.value = element['character'];
                     temp.appendChild(input);
                     act.appendChild(temp);
@@ -68,18 +63,20 @@
                     
                     temp = document.createElement("div");
                     temp.classList.add('input');
+                    temp.classList.add('background');
                     text = document.createElement("p");
                     text.textContent = 'Фон: ';
-                    input.placeholder = 'Изображение фона';
                     temp.appendChild(text);
                     input = document.createElement("input");
                     input.type = 'text';
+                    input.placeholder = 'Изображение фона';
                     input.value = element['background'];
                     temp.appendChild(input);
                     act.appendChild(temp);
 
                     temp = document.createElement("div");
                     temp.classList.add('input');
+                    temp.classList.add('text');
                     text = document.createElement("p");
                     text.textContent = 'Слова: ';
                     temp.appendChild(text);
@@ -92,6 +89,50 @@
                 }
             });
         }
+
+        let save = document.createElement("p");
+        save.classList.add('save');
+        save.textContent = 'сохранить изменения';
+        save.addEventListener('click', () => 
+        {
+            this.newGameData = [];
+            let type, author, character, background, text;
+            let newAct = editor.querySelectorAll('.act');
+            newAct.forEach(element =>
+            {
+                type = element.querySelector('p[type]').getAttribute('type');
+                if (type == 'dialog')
+                {
+                    author = element.querySelector('.author > input').value;
+                    character = element.querySelector('.character > input').value;
+                    background = element.querySelector('.background > input').value;
+                    text = element.querySelector('.text > textarea').textContent;
+                }
+                
+                this.newGameData.push({type, author, character, background, text});
+            });
+
+            let gameData = new FormData();   
+            gameData.append('json', JSON.stringify(this.newGameData));
+            
+            let updateJSON = fetch('./php/updateJSON.php', 
+            {
+                method: 'POST',
+                body: gameData
+            });
+            updateJSON.then((result) =>
+            {
+                result.json().then(() => 
+                {
+                    if (result == 'save')
+                    {
+                        
+                    } 
+                });
+            });
+
+        });
+        editor.appendChild(save);
     }
 }
 

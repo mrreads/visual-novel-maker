@@ -36,12 +36,7 @@
         xhr.send();
         xhr.onload = () => 
         {
-            let type;
-            let author;
-            let character;
-            let background;
-            let text;
-            let temp;
+            let type, author, character, background, text, temp;
 
             this.gameData = JSON.parse(xhr.response);
 
