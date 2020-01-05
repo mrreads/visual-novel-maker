@@ -1,5 +1,51 @@
 ﻿class Game
 {
+    constructor() 
+    {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', './../resources/data/game.json', true);
+        xhr.send();
+        xhr.onload = () => 
+        {
+            let type;
+            let author;
+            let character;
+            let background;
+            let text;
+            let temp;
+
+            this.gameData = JSON.parse(xhr.response);
+
+            temp = this.gameData.shift();
+            type = temp['type'];
+            author = temp['author'];
+            character = temp['character'];
+            background = temp['background'];
+            text = temp['text'];
+            
+            game.screen(type, author, character, text, background);
+
+            this.click = (arg) => 
+            { 
+                if (arg == true)
+                {
+                    if (this.gameData.length != 0)
+                    {
+                        temp = this.gameData.shift();
+                        type = temp['type'];
+                        author = temp['author'];
+                        character = temp['character'];
+                        background = temp['background'];
+                        text = temp['text'];
+                        
+                        game.screen(type, author, character, text, background)
+                    }
+                }
+            };
+
+        };
+    };
+
     screen(type, author, character, text, background)
     {
 
@@ -27,32 +73,10 @@
             textElement.classList.add('text');
             textElement.textContent = text;
             messageElement.appendChild(textElement);
+
+            textElement.addEventListener('click', () => { this.click(true); } );
         }
     }
 }
 
 var game = new Game();
-
-let xhr = new XMLHttpRequest();
-xhr.open('GET', './../resources/data/game.json', true);
-xhr.send();
-xhr.onload = () => 
-{
-    let type;
-    let author;
-    let character;
-    let background;
-    let text;
-
-    let gameData = JSON.parse(xhr.response);
-    gameData.forEach((act) => 
-    {
-        type = act['type'];
-        author = act['author'];
-        character = act['character'];
-        background = act['background'];
-        text = act['text'];
-
-        game.screen(type, author, character, text, background);
-    });
-}
