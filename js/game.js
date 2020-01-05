@@ -1,9 +1,31 @@
 ﻿class Game
 {
-    constructor() 
+    constructor(title, background)
+    {
+        let screen = document.querySelector('#screen');
+        screen.innerHTML = '';
+        screen.style.backgroundImage = 'url("'+background+'")';
+
+        let menu = document.createElement("div");
+        menu.classList.add('menu');
+        screen.appendChild(menu);
+
+        let meniTitle = document.createElement("h1");
+        meniTitle.classList.add('title');
+        meniTitle.textContent = title;
+        menu.appendChild(meniTitle);
+
+        let startButton = document.createElement("p");
+        startButton.classList.add('button');
+        startButton.textContent = 'начать игру';
+        menu.appendChild(startButton);
+        startButton.addEventListener('click', () => { this.start(); } );
+    }
+
+    start() 
     {
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', './../resources/data/game.json', true);
+        xhr.open('GET', './resources/data/game.json', true);
         xhr.send();
         xhr.onload = () => 
         {
@@ -38,7 +60,7 @@
                         background = temp['background'];
                         text = temp['text'];
                         
-                        game.screen(type, author, character, text, background)
+                        this.screen(type, author, character, text, background)
                     }
                 }
             };
@@ -48,7 +70,6 @@
 
     screen(type, author, character, text, background)
     {
-
         if (type == 'dialog')
         {
             let screen = document.querySelector('#screen');
@@ -79,4 +100,4 @@
     }
 }
 
-var game = new Game();
+var game = new Game('Название новеллы', './resources/img/bg1.jpg');

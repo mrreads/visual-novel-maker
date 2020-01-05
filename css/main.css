@@ -18,6 +18,16 @@ body
 	font-family: "Pangolin", cursive;
 }
 
+a
+{
+	text-decoration: none;
+}
+
+div, a, p
+{
+	transition: 0.6s all;
+}
+
 #screen
 {
 	z-index: 1;
@@ -31,12 +41,11 @@ body
 
 #screen > .message
 {
-    width: 100%;
-
 	z-index: 10;
 
 	align-self: flex-end;
 
+	width: 100%;
 	padding: 15px;
 }
 
@@ -58,6 +67,7 @@ body
 #screen > .message > .text
 {
 	font-size: 29px;
+
 	z-index: 10;
 
 	margin-top: 15px;
@@ -74,6 +84,52 @@ body
 	z-index: -1;
 	right: 100px;
 	bottom: 0;
-    max-height: 700px;
+
 	height: 85%;
+	max-height: 700px;
+}
+
+#screen > .menu
+{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+
+	padding: 50px;
+}
+
+#screen > .menu > .title
+{
+	font-size: 68px;
+
+	margin-bottom: auto;
+	padding: 25px 55px;
+
+	text-align: center;
+
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+}
+
+#screen > .menu > .button
+{
+	font-size: 23px;
+
+	align-self: flex-start;
+
+	min-width: 300px;
+	margin-top: 25px;
+	padding: 15px 25px;
+
+	cursor: pointer;
+	text-align: center;
+
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+#screen > .menu > .button:hover
+{
+	background-color: rgba(0, 0, 0, 1);
 }
