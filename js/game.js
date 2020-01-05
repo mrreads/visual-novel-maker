@@ -2,6 +2,13 @@
 {
     constructor(title, background)
     {
+        if (!document.body.querySelector('#screen'))
+        {
+            let temp = document.createElement("div");
+            temp.id = 'screen';
+            document.body.appendChild(temp);
+        }
+
         let screen = document.querySelector('#screen');
         screen.innerHTML = '';
         screen.style.backgroundImage = 'url("'+background+'")';
