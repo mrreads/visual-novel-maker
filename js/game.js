@@ -27,6 +27,12 @@
         startButton.textContent = 'начать игру';
         menu.appendChild(startButton);
         startButton.addEventListener('click', () => { this.start(); } );
+
+        let editButton = document.createElement("p");
+        editButton.classList.add('button');
+        editButton.textContent = 'редактор';
+        menu.appendChild(editButton);
+        editButton.addEventListener('click', () => { window.location.href = 'edit.html'; } );
     }
 
     start() 
