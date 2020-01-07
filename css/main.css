@@ -328,3 +328,24 @@ div, a, p, img
 {
 	right: 345px;
 }
+
+#editor > .actAddWrapper
+{
+	display: row wrap;
+	margin-bottom: 20px;
+}
+
+#editor > .actAddWrapper > .createAct
+{
+	display: inline-block;
+	padding: 5px 20px;
+	cursor: pointer;
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.6);
+	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+#editor > .actAddWrapper > .createAct:hover
+{
+	background-color: rgba(0, 0, 0, 0.9);
+}
