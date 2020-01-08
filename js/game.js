@@ -42,16 +42,15 @@
         xhr.send();
         xhr.onload = () => 
         {
-            let type, author, character, characterTwo, background, text, temp;
+            let type, author, character, characterTwo, background, text, temp = '';
 
             this.gameData = JSON.parse(xhr.response);
 
             temp = this.gameData.shift();
             type = temp['type'];
-            author = temp['author'];
-            character = temp['character'];
-            characterTwo = '';
-                        if (temp['character']) { characterTwo = temp['characterTwo'] };
+            if (temp['author']) { author = temp['author']; } else { author = ''; }
+            if (temp['character']) { character = temp['character']; } else { character = ''; }
+            if (temp['character']) { characterTwo = temp['characterTwo'] };
             background = temp['background'];
             text = temp['text'];
             
@@ -65,9 +64,8 @@
                     {
                         temp = this.gameData.shift();
                         type = temp['type'];
-                        author = temp['author'];
-                        character = temp['character'];
-                        characterTwo = '';
+                        if (temp['author']) { author = temp['author']; } else { author = ''; }
+                        if (temp['character']) { character = temp['character']; } else { character = ''; }
                         if (temp['character']) { characterTwo = temp['characterTwo'] };
                         background = temp['background'];
                         text = temp['text'];
@@ -133,6 +131,23 @@
             characterElement.classList.add('characterTwo');
             characterElement.src = characterTwo;
             messageElement.appendChild(characterElement);
+
+            let textElement = document.createElement("p");
+            textElement.classList.add('text');
+            textElement.textContent = text;
+            messageElement.appendChild(textElement);
+
+            textElement.addEventListener('click', () => { this.click(true); } );
+        }
+        if (type == 'mind')
+        {
+            let screen = document.querySelector('#screen');
+            screen.innerHTML = '';
+            screen.style.backgroundImage = 'url("'+background+'")';
+
+            let messageElement = document.createElement("div");
+            messageElement.classList.add('message');
+            screen.appendChild(messageElement);
 
             let textElement = document.createElement("p");
             textElement.classList.add('text');
