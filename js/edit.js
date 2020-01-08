@@ -10,7 +10,7 @@
             document.body.appendChild(temp);
         }
 
-        let type, author, character, characterTwo , background, text, newAct, gameData;
+        let type, author, character, characterTwo , background, text, newAct, gameData, checkbox;
 
         let editor = document.querySelector('#editor');
 
@@ -40,7 +40,7 @@
                 }
                 if (element['type'] == 'mind')
                 {                    
-                    mind(element['type'], element['background'], element['text']);
+                    mind(element['type'], element['background'], element['text'], element['checkbox']);
                     createAct();
                 }
             });
@@ -278,7 +278,7 @@
                 return act;
             }
 
-            function mind(type, background, message)
+            function mind(type, background, message, checkbox)
             {
                 act = document.createElement("div");
                 act.classList.add('act');
@@ -314,6 +314,18 @@
                 temp.appendChild(input);
                 act.appendChild(temp);
     
+                temp = document.createElement("div");
+                temp.classList.add('input');
+                temp.classList.add('full');
+                text = document.createElement("p");
+                text.textContent = 'На весь экран?: ';
+                temp.appendChild(text);
+                input = document.createElement("input");
+                input.type = 'checkbox';
+                input.checked = checkbox;
+                temp.appendChild(input);
+                act.appendChild(temp);
+
                 remove = document.createElement("p");
                 remove.classList.add('delete');
                 remove.textContent = 'УДАЛИТЬ';
@@ -403,7 +415,7 @@
                 temp.classList.add('createAct');
                 temp.addEventListener('click', (e) =>
                 {
-                    newElem = mind('mind', '', '', '', '', '', '');   
+                    newElem = mind('mind', '', '', '', '', '', '', false);   
                     tempTwo = e.target.parentElement.insertAdjacentElement('beforeBegin', newElem);
                     tempThree = createAct();
                     
@@ -475,7 +487,8 @@
                 {
                     background = element.querySelector('.background input').value;
                     text = element.querySelector('.text > textarea').value;
-                    this.newGameData.push({type, author, character, characterTwo, background, text});
+                    checkbox = element.querySelector('.full input[type=checkbox]').checked;
+                    this.newGameData.push({type, author, character, characterTwo, background, text, checkbox});
                 }
             });
 
@@ -493,6 +506,8 @@
                 {
                     if (result == 'save')
                     {
+                        console.log(this.newGameData);
+                        
                         //window.location.href = 'index.html';
                     } 
                 });

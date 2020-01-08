@@ -42,7 +42,7 @@
         xhr.send();
         xhr.onload = () => 
         {
-            let type, author, character, characterTwo, background, text, temp = '';
+            let type, author, character, characterTwo, background, text, temp, checkbox;
 
             this.gameData = JSON.parse(xhr.response);
 
@@ -50,11 +50,12 @@
             type = temp['type'];
             if (temp['author']) { author = temp['author']; } else { author = ''; }
             if (temp['character']) { character = temp['character']; } else { character = ''; }
-            if (temp['character']) { characterTwo = temp['characterTwo'] };
+            if (temp['character']) { characterTwo = temp['characterTwo'] } else { characterTwo = ''; }
+            if (temp['checkbox']) { checkbox = temp['checkbox'] } else { checkbox = false; }
             background = temp['background'];
             text = temp['text'];
             
-            game.screen(type, author, character, characterTwo, text, background);
+            game.screen(type, author, character, characterTwo, text, background, checkbox);
 
             this.click = (arg) => 
             { 
@@ -66,11 +67,12 @@
                         type = temp['type'];
                         if (temp['author']) { author = temp['author']; } else { author = ''; }
                         if (temp['character']) { character = temp['character']; } else { character = ''; }
-                        if (temp['character']) { characterTwo = temp['characterTwo'] };
+                        if (temp['character']) { characterTwo = temp['characterTwo'] } else { characterTwo = ''; }
+                        if (temp['checkbox']) { checkbox = temp['checkbox'] } else { checkbox = false; }
                         background = temp['background'];
                         text = temp['text'];
                         
-                        this.screen(type, author, character, characterTwo, text, background)
+                        this.screen(type, author, character, characterTwo, text, background, checkbox)
                     }
                 }
             };
@@ -78,7 +80,7 @@
         };
     };
 
-    screen(type, author, character, characterTwo, text, background)
+    screen(type, author, character, characterTwo, text, background, checkbox)
     {
         if (type == 'dialog')
         {
@@ -147,6 +149,7 @@
 
             let messageElement = document.createElement("div");
             messageElement.classList.add('message');
+            if (checkbox == true) { messageElement.classList.add('full'); }
             screen.appendChild(messageElement);
 
             let textElement = document.createElement("p");
