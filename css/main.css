@@ -14,8 +14,9 @@ html
 
 body
 {
-	min-height: 100%;
 	display: flex;
+
+	min-height: 100%;
 }
 
 #screen, #editor
@@ -69,6 +70,7 @@ div, a, p, img
 #screen > .message > .author
 {
 	font-size: 29px;
+	font-weight: bold;
 
 	z-index: 10;
 
@@ -84,11 +86,13 @@ div, a, p, img
 #screen > .message > .text
 {
 	font-size: 29px;
-	cursor: pointer;
+
 	z-index: 10;
 
 	margin-top: 15px;
 	padding: 25px;
+
+	cursor: pointer;
 
 	color: #FFFFFF;
 	background-color: rgba(0, 0, 0, 0.7);
@@ -101,6 +105,17 @@ div, a, p, img
 	z-index: -1;
 	right: 100px;
 	bottom: 0;
+
+	height: 85%;
+	max-height: 900px;
+}
+
+#screen > .message > .characterTwo
+{
+	position: absolute;
+	z-index: -1;
+	bottom: 0;
+	left: 100px;
 
 	height: 85%;
 	max-height: 900px;
@@ -261,13 +276,13 @@ div, a, p, img
 	padding: 15px 25px;
 
 	cursor: pointer;
+	cursor: pointer;
 	text-align: center;
+
 	opacity: 0.4;
 	color: #FFFFFF;
 	background-color: rgba(0, 0, 0, 0.8);
 	box-shadow: 4px 2px 0px rgba(0, 0, 0, 0.4);
-
-	cursor: pointer;
 }
 
 #editor > .save:hover, #editor > .back:hover
@@ -278,18 +293,22 @@ div, a, p, img
 
 #editor > .act > .controls
 {
-	margin-top: 25px;
-	justify-content: flex-end;
 	display: flex;
 	flex-flow: row nowrap;
+	justify-content: flex-end;
+
+	margin-top: 25px;
 }
 
 #editor > .act .delete
 {
 	align-self: flex-start;
+
 	padding: 10px 25px;
-    padding-top: 12px;
+	padding-top: 12px;
+
 	cursor: pointer;
+
 	color: #FFFFFF;
 	background-color: rgba(0, 0, 0, 0.6);
 	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.4);
@@ -298,7 +317,9 @@ div, a, p, img
 #editor > .act > .controls > .move > p
 {
 	padding: 5px 20px;
+
 	cursor: pointer;
+
 	color: #FFFFFF;
 	background-color: rgba(0, 0, 0, 0.6);
 	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.4);
@@ -332,14 +353,19 @@ div, a, p, img
 #editor > .actAddWrapper
 {
 	display: row wrap;
+
 	margin-bottom: 20px;
 }
 
 #editor > .actAddWrapper > .createAct
 {
 	display: inline-block;
+
+	margin-right: 15px;
 	padding: 5px 20px;
+
 	cursor: pointer;
+
 	color: #FFFFFF;
 	background-color: rgba(0, 0, 0, 0.6);
 	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.4);
