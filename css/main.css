@@ -42,7 +42,7 @@ div, a, p, img
 {
 	transition: 0.6s all;
 
-	image-rendering: pixelated;
+	/* image-rendering: pixelated; */
 }
 
 #screen
@@ -84,7 +84,7 @@ div, a, p, img
 #screen > .message > .text
 {
 	font-size: 29px;
-
+	cursor: pointer;
 	z-index: 10;
 
 	margin-top: 15px;
@@ -103,7 +103,7 @@ div, a, p, img
 	bottom: 0;
 
 	height: 85%;
-	max-height: 700px;
+	max-height: 900px;
 }
 
 #screen > .menu

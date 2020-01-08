@@ -2,12 +2,15 @@
 {
     constructor()
     {
+
         if (!document.body.querySelector('#editor'))
         {
             let temp = document.createElement("div");
             temp.id = 'editor';
             document.body.appendChild(temp);
         }
+
+        let type, author, character, background, text, newAct, gameData;
 
         let editor = document.querySelector('#editor');
 
@@ -90,14 +93,18 @@
                 text.textContent = 'Слова: ';
                 temp.appendChild(text);
                 input = document.createElement("textarea");
-                input.textContent = message;
+                input.value = message;
                 temp.appendChild(input);
                 act.appendChild(temp);
     
                 remove = document.createElement("p");
                 remove.classList.add('delete');
                 remove.textContent = 'УДАЛИТЬ';
-                remove.addEventListener('click', (e) => { e.target.parentElement.parentElement.remove(); });
+                remove.addEventListener('click', (e) => 
+                {
+                    e.target.parentElement.parentElement.nextElementSibling.remove(); 
+                    e.target.parentElement.parentElement.remove();
+                });
     
                 move = document.createElement("div");
                 move.classList.add('move');
@@ -150,7 +157,6 @@
                     newElem = dialog('dialog', '', '', '', '', '');   
                     tempTwo = e.target.parentElement.insertAdjacentElement('beforeBegin', newElem);
                     tempThree = createAct();
-                    console.log(tempTwo);
                     
                     tempTwo.insertAdjacentElement('beforeBegin', tempThree);
                 });
@@ -194,23 +200,21 @@
         save.addEventListener('click', () => 
         {
             this.newGameData = [];
-            let type, author, character, background, text;
-            let newAct = editor.querySelectorAll('.act');
+            newAct = editor.querySelectorAll('.act');
             newAct.forEach(element =>
             {
                 type = element.querySelector('p[type]').getAttribute('type');
                 if (type == 'dialog')
                 {
-                    author = element.querySelector('.author > input').value;
-                    character = element.querySelector('.character > input').value;
-                    background = element.querySelector('.background > input').value;
-                    text = element.querySelector('.text > textarea').textContent;
+                    author = element.querySelector('.author input').value;
+                    character = element.querySelector('.character input').value;
+                    background = element.querySelector('.background input').value;
+                    text = element.querySelector('.text > textarea').value;
+                    this.newGameData.push({type, author, character, background, text});
                 }
-                
-                this.newGameData.push({type, author, character, background, text});
             });
 
-            let gameData = new FormData();   
+            gameData = new FormData();   
             gameData.append('json', JSON.stringify(this.newGameData));
             
             let updateJSON = fetch('./php/updateJSON.php', 
@@ -229,6 +233,7 @@
                 });
             });
         });
+
         editor.appendChild(save);
     }
 }
